@@ -3,18 +3,6 @@
 
 #include "bmp24.h"
 
-typedef struct {
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
-} t_pixel;
-
-typedef struct {
-    t_pixel **pixels;
-    int width;
-    int height;
-    int colorDepth;
-} t_bmp24;
 
 // Dynamically allocate a pixel matrix of size height x width
 t_pixel **bmp24_allocateDataPixels(int width, int height) {
