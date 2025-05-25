@@ -72,4 +72,62 @@ void bmp24_free(t_bmp24 *img) {
      fwrite(buffer, size, n, file);
  }
 
+void bmp24_readPixelValue(t_bmp24 *image, int x, int y, FILE *file) {
+    if (!image || !file) return;
+
+    // BMP pixels stored bottom-to-top, so invert y
+    int invertedY = image->height - 1 - y;
+
+    // Each pixel = 3 bytes (B, G, R)
+    int pixelSize = 3;
+
+    // Calculate position in file: offset + (line * width + column) * pixelSize
+    uint32_t pos = BITMAP_OFFSET + (invertedY * image->width + x) * pixelSize;
+
+    unsigned char bgr[3];
+    file_rawRead(pos, bgr, 1, pixelSize, file);
+
+    // Store pixel in image->pixels in RGB order
+    image->pixels[y][x].r = bgr[2];
+    image->pixels[y][x].g = bgr[1];
+    image->pixels[y][x].b = bgr[0];
+}
+
+void bmp24_readPixelData(t_bmp24 *image, FILE *file) {
+    if (!image || !file) return;
+
+    for (int y = 0; y < image->height; y++) {
+        for (int x = 0; x < image->width; x++) {
+            bmp24_readPixelValue(image, x, y, file);
+        }
+    }
+}
+
+void bmp24_writePixelValue(t_bmp24 *image, int x, int y, FILE *file) {
+    if (!image || !file) return;
+
+    int invertedY = image->height - 1 - y;
+    int pixelSize = 3;
+
+    uint32_t pos = BITMAP_OFFSET + (invertedY * image->width + x) * pixelSize;
+
+    unsigned char bgr[3];
+    bgr[0] = image->pixels[y][x].b;
+    bgr[1] = image->pixels[y][x].g;
+    bgr[2] = image->pixels[y][x].r;
+
+    file_rawWrite(pos, bgr, 1, pixelSize, file);
+}
+
+void bmp24_writePixelData(t_bmp24 *image, FILE *file) {
+    if (!image || !file) return;
+
+    for (int y = 0; y < image->height; y++) {
+        for (int x = 0; x < image->width; x++) {
+            bmp24_writePixelValue(image, x, y, file);
+        }
+    }
+}
+
+
 
