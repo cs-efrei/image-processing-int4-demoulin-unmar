@@ -9,11 +9,15 @@
 ## 🗂 Project Structure
 .
 ├── bmp8.h / bmp8.c # Functions for 8-bit grayscale images
+
 ├── bmp24.h / bmp24.c # Functions for 24-bit color images
+
 ├── histogram_equalization.c # Histogram equalization (grayscale and color)
+
 ├── main.c # Main menu and user interface
-├── filters.c # Convolution filters (blur, sharpen, etc.)
+
 ├── images/ # Folder for .bmp test images
+
 └── README.md # This file
 
 ---
@@ -44,9 +48,7 @@ This project aims to build an image processing tool in the C programming languag
 gcc main.c bmp8.c bmp24.c histogram_equalization.c filters.c -o image_processor -lm
 ```
 
-💡 Note: -lm links the math library (used for round() and other functions).
-
-▶️ How to Run
+##▶️ How to Run
 
 ```bash
 ./image_processor
@@ -61,7 +63,7 @@ Then follow the menu options to:
 
 -Save the result
 
-🧪 Test Images
+33🧪 Test Images
 
 Place your test .bmp files in the images/ directory.
 Recommended test files:
