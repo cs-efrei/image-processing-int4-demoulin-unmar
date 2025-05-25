@@ -1,18 +1,8 @@
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct {
-    unsigned char header[54];
-    unsigned char colorTable[1024];
-    unsigned char * data;
-    unsigned int width;
-    unsigned int height;
-    unsigned int colorDepth;
-    unsigned int dataSize;
-} t_bmp8;
+#include <bmp8.h>
 
 
 t_bmp8* bmp8_loadImage(const char *filename) {
