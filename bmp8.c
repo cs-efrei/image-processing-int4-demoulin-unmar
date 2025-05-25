@@ -16,13 +16,6 @@ typedef struct {
 
 
 t_bmp8* bmp8_loadImage(const char *filename) {
-    FILE *file = fopen(filename, "rb");
-    if (!file) {
-        fprintf(stderr, "Erreur : impossible d'ouvrir le fichier %s\n", filename);
-        return NULL;
-    }
-
-t_bmp8* bmp8_loadImage(const char *filename) {
     // Open the file in binary read mode
     FILE *file = fopen(filename, "rb");
     if (!file) {
