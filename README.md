@@ -63,7 +63,7 @@ Then follow the menu options to:
 
 -Save the result
 
-33🧪 Test Images
+##🧪 Test Images
 
 Place your test .bmp files in the images/ directory.
 Recommended test files:
