@@ -129,5 +129,56 @@ void bmp24_writePixelData(t_bmp24 *image, FILE *file) {
     }
 }
 
+t_bmp24 *bmp24_loadImage(const char *filename) {
+    FILE *file = fopen(filename, "rb");
+    if (!file) {
+        fprintf(stderr, "Error: unable to open file %s\n", filename);
+        return NULL;
+    }
+
+
+    uint32_t width = 0, height = 0, colorDepth = 0;
+
+    // Read width, height, colorDepth from BMP info header at their offsets
+    file_rawRead(BITMAP_WIDTH, &width, sizeof(uint32_t), 1, file);
+    file_rawRead(BITMAP_HEIGHT, &height, sizeof(uint32_t), 1, file);
+    file_rawRead(BITMAP_DEPTH, &colorDepth, sizeof(uint32_t), 1, file);
+
+    // Allocate the image structure
+    t_bmp24 *image = bmp24_allocate(width, height, (int)colorDepth);
+    if (!image) {
+        fclose(file);
+        fprintf(stderr, "Error: allocation of bmp24 image failed\n");
+        return NULL;
+    }
+
+    // Read headers into image->header and image->header_info fields
+    file_rawRead(0, &image->header, sizeof(t_bmp_header), 1, file);
+    file_rawRead(14, &image->header_info, sizeof(t_bmp_info), 1, file);
+
+    // Read the pixel data into the image's pixel matrix
+    bmp24_readPixelData(image, file);
+
+    fclose(file);
+
+    return image;
+}
+
+void bmp24_saveImage(const char *filename, t_bmp24 *image) {
+    FILE *file = fopen(filename, "wb");
+    if (!file) {
+        fprintf(stderr, "Error: unable to open file %s for writing\n", filename);
+        return;
+    }
+
+    // Write headers
+    file_rawWrite(0, &image->header, sizeof(t_bmp_header), 1, file);
+    file_rawWrite(14, &image->header_info, sizeof(t_bmp_info), 1, file);
+
+    // Write pixel data
+    bmp24_writePixelData(image, file);
+
+    fclose(file);
+}
 
 
