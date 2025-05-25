@@ -1,13 +1,13 @@
 # 📷 Image Processing in C – TI202I Project
 
 ## 👥 Authors
-- **DEMOULIN Hugo** –  
-- **UNMAR Emeline** – 
+- **DEMOULIN Hugo** – Hug0dml
+- **UNMAR Emeline** – LeyaUnm
 
 ---
 
 ## 🗂 Project Structure
-.
+
 ├── bmp8.h / bmp8.c # Functions for 8-bit grayscale images
 
 ├── bmp24.h / bmp24.c # Functions for 24-bit color images
