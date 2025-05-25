@@ -8,17 +8,15 @@
 
 ## 🗂 Project Structure
 
-├── bmp8.h / bmp8.c # Functions for 8-bit grayscale images
+├── bmp8.h / bmp8.c                           # Functions for 8-bit grayscale images
 
-├── bmp24.h / bmp24.c # Functions for 24-bit color images
+├── bmp24.h / bmp24.c                         # Functions for 24-bit color images
 
-├── histogram_equalization.c # Histogram equalization (grayscale and color)
+├── main.c                                    # Main menu and user interface
 
-├── main.c # Main menu and user interface
+├── images/                                   # Folder for .bmp test images
 
-├── images/ # Folder for .bmp test images
-
-└── README.md # This file
+└── README.md                                 # This file
 
 ---
 
