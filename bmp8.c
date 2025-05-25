@@ -7,7 +7,7 @@
 
 t_bmp8* bmp8_loadImage(const char *filename) {
     // Open the file in binary read mode
-    t_bmp8 *file = fopen(filename, "rb");
+    FILE *file = fopen(filename, "rb");
     if (!file) {
         fprintf(stderr, "Error: unable to open file %s\n", filename);
         return NULL;
